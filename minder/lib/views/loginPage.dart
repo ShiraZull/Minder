@@ -56,7 +56,7 @@ class _LoginPageState extends State<LoginPage> {
         paddingMinderImageTop = height * 0.01;
 
         paddingTextFieldUsernameLeft = width * 0.2;
-        paddingTextFieldUsernameTop = height * 0.2;
+        paddingTextFieldUsernameTop = height * 0.25;
         paddingTextFieldUsernameRight = width * 0.15;
 
         paddingTextFieldPasswordLeft = width * 0.2;
@@ -80,12 +80,6 @@ class _LoginPageState extends State<LoginPage> {
       height: screenHeight,
       width: screenWidth,
     );
-    print(paddingMinderTextLeft);
-    print(paddingMinderTextTop);
-    print(minderTextSize);
-    print(paddingLoginButtonBottom);
-    print(loginSigninButtonSizeWidth);
-    print(loginSigninButtonSizeHeight);
     return Scaffold(
       backgroundColor: widget.backgroundColor,
       body: Column(children: [
