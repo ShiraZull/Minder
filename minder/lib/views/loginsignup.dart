@@ -5,6 +5,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:minder/config/palette.dart';
 import 'package:minder/views/loginPage.dart';
+import 'package:minder/views/signupPage.dart';
 
 class LoginSignup extends StatefulWidget {
   const LoginSignup({super.key});
@@ -67,10 +68,12 @@ class _LoginSignupState extends State<LoginSignup> {
       height: screenHeight,
       width: screenWidth,
     );
-    print(paddingMinderTextLeft);
-    print(paddingMinderTextTop);
-    print(minderTextSize);
-    print(paddingLoginButtonBottom);
+    // print(paddingMinderTextLeft);
+    // print(paddingMinderTextTop);
+    // print(minderTextSize);
+    // print(paddingLoginButtonBottom);
+    print(paddingMinderImageLeft);
+    print(paddingMinderImageTop);
     return Scaffold(
       backgroundColor: Palette.backgroundColor,
       body: Column(
@@ -134,7 +137,15 @@ class _LoginSignupState extends State<LoginSignup> {
                         fontSize: loginTextSize,
                         color: Palette.loginTextColor)),
               ),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const SignupPage(
+                      backgroundColor: Palette.backgroundColor,
+                    ),
+                  ),
+                );
+              },
             ),
           ),
         ],
