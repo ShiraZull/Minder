@@ -27,6 +27,7 @@ class _LoginSignupState extends State<LoginSignup> {
       loginSigninButtonSizeWidth = 0,
       loginTextSize = 0;
 
+
   void updateMeasurements({
     required Orientation orientation,
     required double height,
@@ -68,12 +69,7 @@ class _LoginSignupState extends State<LoginSignup> {
       height: screenHeight,
       width: screenWidth,
     );
-    // print(paddingMinderTextLeft);
-    // print(paddingMinderTextTop);
-    // print(minderTextSize);
-    // print(paddingLoginButtonBottom);
-    print(paddingMinderImageLeft);
-    print(paddingMinderImageTop);
+
     return Scaffold(
       backgroundColor: Palette.backgroundColor,
       body: Column(

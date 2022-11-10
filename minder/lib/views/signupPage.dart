@@ -88,12 +88,7 @@ class _SignupPageState extends State<SignupPage> {
       height: screenHeight,
       width: screenWidth,
     );
-    // print(paddingMinderTextLeft);
-    // print(paddingMinderTextTop);
-    // print(minderTextSize);
-    // print(paddingLoginButtonBottom);
-    print(paddingMinderImageLeft);
-    print(paddingMinderImageTop);
+
     return Scaffold(
       backgroundColor: widget.backgroundColor,
       body: Column(

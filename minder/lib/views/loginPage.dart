@@ -1,8 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:minder/config/palette.dart';
+import '../main.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key, required this.backgroundColor});
@@ -56,7 +58,7 @@ class _LoginPageState extends State<LoginPage> {
         paddingMinderImageTop = height * 0.01;
 
         paddingTextFieldUsernameLeft = width * 0.2;
-        paddingTextFieldUsernameTop = height * 0.2;
+        paddingTextFieldUsernameTop = height * 0.25;
         paddingTextFieldUsernameRight = width * 0.15;
 
         paddingTextFieldPasswordLeft = width * 0.2;
@@ -67,6 +69,15 @@ class _LoginPageState extends State<LoginPage> {
       case Orientation.landscape:
         break;
     }
+  }
+
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
   }
 
   @override
@@ -80,12 +91,6 @@ class _LoginPageState extends State<LoginPage> {
       height: screenHeight,
       width: screenWidth,
     );
-    print(paddingMinderTextLeft);
-    print(paddingMinderTextTop);
-    print(minderTextSize);
-    print(paddingLoginButtonBottom);
-    print(loginSigninButtonSizeWidth);
-    print(loginSigninButtonSizeHeight);
     return Scaffold(
       backgroundColor: widget.backgroundColor,
       body: Column(children: [
@@ -118,7 +123,8 @@ class _LoginPageState extends State<LoginPage> {
                     OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
                 fillColor: Colors.blueGrey,
                 filled: true),
-            maxLength: 15,
+            maxLength: 50,
+            controller: emailController,
           ),
         ),
         Padding(
@@ -137,6 +143,7 @@ class _LoginPageState extends State<LoginPage> {
                 fillColor: Colors.blueGrey,
                 filled: true),
             maxLength: 20,
+            controller: passwordController,
           ),
         ),
         Padding(
@@ -149,16 +156,34 @@ class _LoginPageState extends State<LoginPage> {
                 backgroundColor: Palette.loginButtonColor,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30))),
+            onPressed: sginIn,
             child: Text(
               'Login',
               style: GoogleFonts.fugazOne(
                   textStyle: TextStyle(
                       fontSize: loginTextSize, color: Palette.loginTextColor)),
             ),
-            onPressed: () {},
           ),
         ),
       ]),
     );
+  }
+
+  Future sginIn() async {
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) => const Center(
+              child: CircularProgressIndicator(),
+            ));
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: emailController.text.trim(),
+        password: passwordController.text.trim(),
+      );
+    } on FirebaseAuthException catch (e) {
+      print(e);
+    }
+    navigatorKey.currentState!.popUntil((route) => route.isFirst);
   }
 }
