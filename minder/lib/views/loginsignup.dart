@@ -6,14 +6,14 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:minder/config/palette.dart';
 import 'package:minder/views/loginPage.dart';
 
-class loginsignup extends StatefulWidget {
-  const loginsignup({super.key});
+class LoginSignup extends StatefulWidget {
+  const LoginSignup({super.key});
 
   @override
-  State<loginsignup> createState() => _loginsignupState();
+  State<LoginSignup> createState() => _LoginSignupState();
 }
 
-class _loginsignupState extends State<loginsignup> {
+class _LoginSignupState extends State<LoginSignup> {
   double paddingMinderTextLeft = 0,
       paddingMinderTextTop = 0,
       minderTextSize = 0,
@@ -39,16 +39,16 @@ class _loginsignupState extends State<loginsignup> {
         paddingMinderTextTop = height * 0.08;
         minderTextSize = height * 0.1;
 
-        paddingLoginButtonLeft = width * 0.2;
-        paddingLoginButtonBottom = height * 0.7;
+        paddingLoginButtonLeft = width * 0.15;
+        paddingLoginButtonBottom = height * 0.4;
         loginSigninButtonSizeWidth = width * 0.66;
         loginSigninButtonSizeHeight = height * 0.07;
         loginTextSize = width * 0.1;
 
-        paddingSignupButtonBottom = height * 0.8;
+        paddingSignupButtonBottom = height * 0.02;
 
-        paddingMinderImageLeft = width * 0.43;
-        paddingMinderImageTop = height * 0.26;
+        paddingMinderImageLeft = width * 0.1;
+        paddingMinderImageTop = height * 0.01;
 
         break;
       case Orientation.landscape:
@@ -73,7 +73,7 @@ class _loginsignupState extends State<loginsignup> {
     print(paddingLoginButtonBottom);
     return Scaffold(
       backgroundColor: Palette.backgroundColor,
-      body: Stack(
+      body: Column(
         children: [
           Padding(
             padding: EdgeInsets.fromLTRB(
