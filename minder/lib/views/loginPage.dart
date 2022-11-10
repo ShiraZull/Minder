@@ -29,6 +29,10 @@ class _LoginPageState extends State<LoginPage> {
       paddingTextFieldUsernameTop = 0,
       paddingTextFieldUsernameRight = 0;
 
+  double paddingTextFieldPasswordLeft = 0,
+      paddingTextFieldPasswordTop = 0,
+      paddingTextFieldPasswordRight = 0;
+
   void updateMeasurements({
     required Orientation orientation,
     required double height,
@@ -38,22 +42,26 @@ class _LoginPageState extends State<LoginPage> {
     final double summedMeasurements = (height + width);
     switch (orientation) {
       case Orientation.portrait:
-        paddingMinderTextLeft = width * 0.2;
+        paddingMinderTextLeft = width * 0.05;
         paddingMinderTextTop = height * 0.08;
         minderTextSize = height * 0.1;
 
-        paddingLoginButtonLeft = width * 0.2;
-        paddingLoginButtonBottom = height * 0.8;
+        paddingLoginButtonLeft = width * 0.05;
+        paddingLoginButtonBottom = height * 0;
         loginSigninButtonSizeWidth = width * 0.66;
         loginSigninButtonSizeHeight = height * 0.07;
         loginTextSize = width * 0.1;
 
-        paddingMinderImageLeft = width * 0.43;
-        paddingMinderImageTop = height * 0.26;
+        paddingMinderImageLeft = width * 0.03;
+        paddingMinderImageTop = height * 0.01;
 
         paddingTextFieldUsernameLeft = width * 0.2;
-        paddingTextFieldUsernameTop = height * 0.5;
+        paddingTextFieldUsernameTop = height * 0.2;
         paddingTextFieldUsernameRight = width * 0.15;
+
+        paddingTextFieldPasswordLeft = width * 0.2;
+        paddingTextFieldPasswordTop = height * 0;
+        paddingTextFieldPasswordRight = width * 0.15;
 
         break;
       case Orientation.landscape:
@@ -80,7 +88,7 @@ class _LoginPageState extends State<LoginPage> {
     print(loginSigninButtonSizeHeight);
     return Scaffold(
       backgroundColor: widget.backgroundColor,
-      body: Stack(children: [
+      body: Column(children: [
         Padding(
           padding: EdgeInsets.fromLTRB(
               paddingMinderTextLeft, paddingMinderTextTop, 0, 0),
@@ -100,7 +108,7 @@ class _LoginPageState extends State<LoginPage> {
               paddingTextFieldUsernameTop, paddingTextFieldUsernameRight, 0),
           child: TextFormField(
             decoration: InputDecoration(
-                contentPadding: EdgeInsets.fromLTRB(110, 5, 0, 30),
+                contentPadding: EdgeInsets.fromLTRB(85, 5, 0, 30),
                 hintText: 'Username',
                 hintStyle: GoogleFonts.fugazOne(
                     textStyle: TextStyle(
@@ -108,9 +116,27 @@ class _LoginPageState extends State<LoginPage> {
                         color: Palette.loginTextColor)),
                 border:
                     OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
-                fillColor: Colors.black,
+                fillColor: Colors.blueGrey,
                 filled: true),
             maxLength: 15,
+          ),
+        ),
+        Padding(
+          padding: EdgeInsets.fromLTRB(paddingTextFieldPasswordLeft,
+              paddingTextFieldPasswordTop, paddingTextFieldPasswordRight, 0),
+          child: TextFormField(
+            decoration: InputDecoration(
+                contentPadding: EdgeInsets.fromLTRB(85, 5, 0, 30),
+                hintText: 'Password',
+                hintStyle: GoogleFonts.fugazOne(
+                    textStyle: TextStyle(
+                        fontSize: loginTextSize - 20,
+                        color: Palette.loginTextColor)),
+                border:
+                    OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
+                fillColor: Colors.blueGrey,
+                filled: true),
+            maxLength: 20,
           ),
         ),
         Padding(
