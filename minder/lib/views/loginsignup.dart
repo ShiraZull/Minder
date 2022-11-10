@@ -68,12 +68,7 @@ class _LoginSignupState extends State<LoginSignup> {
       height: screenHeight,
       width: screenWidth,
     );
-    // print(paddingMinderTextLeft);
-    // print(paddingMinderTextTop);
-    // print(minderTextSize);
-    // print(paddingLoginButtonBottom);
-    print(paddingMinderImageLeft);
-    print(paddingMinderImageTop);
+
     return Scaffold(
       backgroundColor: Palette.backgroundColor,
       body: Column(
