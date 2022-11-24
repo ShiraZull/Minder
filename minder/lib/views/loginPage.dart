@@ -3,6 +3,7 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:minder/config/palette.dart';
+import 'package:minder/views/signupPage.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key, required this.backgroundColor});
@@ -25,9 +26,9 @@ class _LoginPageState extends State<LoginPage> {
       loginSigninButtonSizeWidth = 0,
       loginTextSize = 0;
 
-  double paddingTextFieldUsernameLeft = 0,
-      paddingTextFieldUsernameTop = 0,
-      paddingTextFieldUsernameRight = 0;
+  double paddingTextFieldEmailLeft = 0,
+      paddingTextFieldEmailTop = 0,
+      paddingTextFieldEmailRight = 0;
 
   double paddingTextFieldPasswordLeft = 0,
       paddingTextFieldPasswordTop = 0,
@@ -55,12 +56,12 @@ class _LoginPageState extends State<LoginPage> {
         paddingMinderImageLeft = width * 0.03;
         paddingMinderImageTop = height * 0.01;
 
-        paddingTextFieldUsernameLeft = width * 0.2;
-        paddingTextFieldUsernameTop = height * 0.25;
-        paddingTextFieldUsernameRight = width * 0.15;
+        paddingTextFieldEmailLeft = width * 0.2;
+        paddingTextFieldEmailTop = height * 0.25;
+        paddingTextFieldEmailRight = width * 0.15;
 
         paddingTextFieldPasswordLeft = width * 0.2;
-        paddingTextFieldPasswordTop = height * 0;
+        paddingTextFieldPasswordTop = height * 0.02;
         paddingTextFieldPasswordRight = width * 0.15;
 
         break;
@@ -98,12 +99,12 @@ class _LoginPageState extends State<LoginPage> {
           child: Image.asset('assets/images/minderImage.png'),
         ),
         Padding(
-          padding: EdgeInsets.fromLTRB(paddingTextFieldUsernameLeft,
-              paddingTextFieldUsernameTop, paddingTextFieldUsernameRight, 0),
+          padding: EdgeInsets.fromLTRB(paddingTextFieldEmailLeft,
+              paddingTextFieldEmailTop, paddingTextFieldEmailRight, 0),
           child: TextFormField(
             decoration: InputDecoration(
-                contentPadding: EdgeInsets.fromLTRB(85, 5, 0, 30),
-                hintText: 'Username',
+                contentPadding: EdgeInsets.fromLTRB(105, 5, 0, 30),
+                hintText: 'Email',
                 hintStyle: GoogleFonts.fugazOne(
                     textStyle: TextStyle(
                         fontSize: loginTextSize - 20,
@@ -112,7 +113,6 @@ class _LoginPageState extends State<LoginPage> {
                     OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
                 fillColor: Colors.blueGrey,
                 filled: true),
-            maxLength: 15,
           ),
         ),
         Padding(
@@ -152,6 +152,25 @@ class _LoginPageState extends State<LoginPage> {
             onPressed: () {},
           ),
         ),
+        Padding(
+            padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+            child: TextButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const SignupPage(
+                      backgroundColor: Palette.backgroundColor,
+                    ),
+                  ),
+                );
+              },
+              child: Text(
+                'Do not have an account? Signup',
+                style: GoogleFonts.fugazOne(
+                    textStyle: TextStyle(
+                        fontSize: loginTextSize - 25, color: Colors.black)),
+              ),
+            ))
       ]),
     );
   }

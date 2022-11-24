@@ -167,7 +167,7 @@ class _SignupPageState extends State<SignupPage> {
               style: ElevatedButton.styleFrom(
                   minimumSize: Size(
                       loginSigninButtonSizeWidth, loginSigninButtonSizeHeight),
-                  backgroundColor: Palette.signupButtonColor,
+                  backgroundColor: Palette.loginButtonColor,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30))),
               child: Text(
