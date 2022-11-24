@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "23807303759",
+    "project_id": "minder-34340",
+    "storage_bucket": "minder-34340.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:23807303759:android:52e43a5d18ec05494dca3a",
+        "android_client_info": {
+          "package_name": "com.example.minder"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "23807303759-b7nd5p6rnrne52qu037p6ibdsscticsq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB7stwo_1AzAEt8YBd1qa_we1G-pLjU2rM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "23807303759-b7nd5p6rnrne52qu037p6ibdsscticsq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
