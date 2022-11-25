@@ -20,6 +20,9 @@ doc/api/
 *.js.deps
 *.js.map
 
-
 # Custom
 .vscode/*
+minder/.vscode/*
+minder/linux/
+minder/macos/
+minder/windows/
