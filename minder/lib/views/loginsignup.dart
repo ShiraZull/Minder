@@ -85,7 +85,7 @@ class _LoginSignupState extends State<LoginSignup> {
           Padding(
             padding: EdgeInsets.fromLTRB(
                 paddingMinderImageLeft, paddingMinderImageTop, 0, 0),
-            child: Image.asset('assets/images/minderImage.png'),
+            child: Image.asset('assets/images/minderIcon.png'),
           ),
           Padding(
             padding: EdgeInsets.fromLTRB(

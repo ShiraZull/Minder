@@ -94,7 +94,7 @@ class _LoginPageState extends State<LoginPage> {
         Padding(
           padding: EdgeInsets.fromLTRB(
               paddingMinderImageLeft, paddingMinderImageTop, 0, 0),
-          child: Image.asset('assets/images/minderImage.png'),
+          child: Image.asset('assets/images/minderIcon.png'),
         ),
         Padding(
           padding: EdgeInsets.fromLTRB(paddingTextFieldEmailLeft,
@@ -103,13 +103,13 @@ class _LoginPageState extends State<LoginPage> {
             decoration: InputDecoration(
                 contentPadding: EdgeInsets.fromLTRB(105, 5, 0, 30),
                 hintText: 'Email',
-                hintStyle: GoogleFonts.fugazOne(
+                hintStyle: GoogleFonts.forum(
                     textStyle: TextStyle(
                         fontSize: loginTextSize - 20,
                         color: Palette.loginTextColor)),
                 border:
                     OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
-                fillColor: Colors.blueGrey,
+                fillColor: Colors.white,
                 filled: true),
           ),
         ),
@@ -120,13 +120,13 @@ class _LoginPageState extends State<LoginPage> {
             decoration: InputDecoration(
                 contentPadding: EdgeInsets.fromLTRB(85, 5, 0, 30),
                 hintText: 'Password',
-                hintStyle: GoogleFonts.fugazOne(
+                hintStyle: GoogleFonts.forum(
                     textStyle: TextStyle(
                         fontSize: loginTextSize - 20,
                         color: Palette.loginTextColor)),
                 border:
                     OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
-                fillColor: Colors.blueGrey,
+                fillColor: Colors.white,
                 filled: true),
             maxLength: 20,
           ),
@@ -143,9 +143,10 @@ class _LoginPageState extends State<LoginPage> {
                     borderRadius: BorderRadius.circular(30))),
             child: Text(
               'Login',
-              style: GoogleFonts.fugazOne(
+              style: GoogleFonts.francoisOne(
                   textStyle: TextStyle(
-                      fontSize: loginTextSize, color: Palette.loginTextColor)),
+                      fontSize: loginTextSize,
+                      color: Palette.loginButtonTextColor)),
             ),
             onPressed: () {},
           ),
@@ -164,9 +165,9 @@ class _LoginPageState extends State<LoginPage> {
               },
               child: Text(
                 'Do not have an account? Signup',
-                style: GoogleFonts.fugazOne(
+                style: GoogleFonts.forum(
                     textStyle: TextStyle(
-                        fontSize: loginTextSize - 25, color: Colors.black)),
+                        fontSize: loginTextSize - 25, color: Colors.blueGrey)),
               ),
             ))
       ]),

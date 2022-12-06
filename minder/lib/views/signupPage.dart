@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:minder/views/loginPage.dart';
 
 import '../config/palette.dart';
 
@@ -105,7 +106,7 @@ class _SignupPageState extends State<SignupPage> {
           Padding(
             padding: EdgeInsets.fromLTRB(
                 paddingMinderImageLeft, paddingMinderImageTop, 0, 0),
-            child: Image.asset('assets/images/minderImage.png'),
+            child: Image.asset('assets/images/minderIcon.png'),
           ),
           Padding(
             padding: EdgeInsets.fromLTRB(paddingTextFieldEmailLeft,
@@ -114,13 +115,13 @@ class _SignupPageState extends State<SignupPage> {
               decoration: InputDecoration(
                   contentPadding: EdgeInsets.fromLTRB(100, 5, 0, 30),
                   hintText: 'Email',
-                  hintStyle: GoogleFonts.fugazOne(
+                  hintStyle: GoogleFonts.forum(
                       textStyle: TextStyle(
                           fontSize: signupTextSize - 20,
                           color: Palette.loginTextColor)),
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(30)),
-                  fillColor: Colors.blueGrey,
+                  fillColor: Colors.white,
                   filled: true),
             ),
           ),
@@ -131,13 +132,13 @@ class _SignupPageState extends State<SignupPage> {
               decoration: InputDecoration(
                   contentPadding: EdgeInsets.fromLTRB(85, 5, 0, 30),
                   hintText: 'Username',
-                  hintStyle: GoogleFonts.fugazOne(
+                  hintStyle: GoogleFonts.forum(
                       textStyle: TextStyle(
                           fontSize: signupTextSize - 20,
                           color: Palette.loginTextColor)),
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(30)),
-                  fillColor: Colors.blueGrey,
+                  fillColor: Colors.white,
                   filled: true),
               maxLength: 15,
             ),
@@ -149,13 +150,13 @@ class _SignupPageState extends State<SignupPage> {
               decoration: InputDecoration(
                   contentPadding: EdgeInsets.fromLTRB(85, 5, 0, 30),
                   hintText: 'Password',
-                  hintStyle: GoogleFonts.fugazOne(
+                  hintStyle: GoogleFonts.forum(
                       textStyle: TextStyle(
                           fontSize: signupTextSize - 20,
                           color: Palette.loginTextColor)),
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(30)),
-                  fillColor: Colors.blueGrey,
+                  fillColor: Colors.white,
                   filled: true),
               maxLength: 20,
             ),
@@ -172,12 +173,20 @@ class _SignupPageState extends State<SignupPage> {
                       borderRadius: BorderRadius.circular(30))),
               child: Text(
                 'Signup',
-                style: GoogleFonts.fugazOne(
+                style: GoogleFonts.francoisOne(
                     textStyle: TextStyle(
                         fontSize: signupTextSize,
-                        color: Palette.loginTextColor)),
+                        color: Palette.loginButtonTextColor)),
               ),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const LoginPage(
+                      backgroundColor: Palette.backgroundColor,
+                    ),
+                  ),
+                );
+              },
             ),
           ),
         ],
