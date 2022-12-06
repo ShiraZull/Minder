@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:minder/config/palette.dart';
-import 'package:minder/views/loginPage.dart';
-import 'views/loginsignup.dart';
+import 'package:minder/views/loginsignup.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const LoginPage(
+      home: const LoginSignup(
         backgroundColor: Palette.backgroundColor,
       ),
     );

@@ -8,7 +8,7 @@ import 'package:minder/views/loginPage.dart';
 import 'package:minder/views/signupPage.dart';
 
 class LoginSignup extends StatefulWidget {
-  const LoginSignup({super.key});
+  const LoginSignup({super.key, required Color backgroundColor});
 
   @override
   State<LoginSignup> createState() => _LoginSignupState();
@@ -99,10 +99,10 @@ class _LoginSignupState extends State<LoginSignup> {
                       borderRadius: BorderRadius.circular(30))),
               child: Text(
                 'Login',
-                style: GoogleFonts.fugazOne(
+                style: GoogleFonts.francoisOne(
                     textStyle: TextStyle(
                         fontSize: loginTextSize,
-                        color: Palette.loginTextColor)),
+                        color: Palette.loginButtonTextColor)),
               ),
               onPressed: () {
                 Navigator.of(context).push(
@@ -127,10 +127,10 @@ class _LoginSignupState extends State<LoginSignup> {
                       borderRadius: BorderRadius.circular(30))),
               child: Text(
                 'Signup',
-                style: GoogleFonts.fugazOne(
+                style: GoogleFonts.francoisOne(
                     textStyle: TextStyle(
                         fontSize: loginTextSize,
-                        color: Palette.loginTextColor)),
+                        color: Palette.loginButtonTextColor)),
               ),
               onPressed: () {
                 Navigator.of(context).push(

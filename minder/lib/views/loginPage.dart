@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:minder/config/palette.dart';
+import 'package:minder/views/mainPage.dart';
 import 'package:minder/views/signupPage.dart';
 
 class LoginPage extends StatefulWidget {
@@ -148,7 +149,15 @@ class _LoginPageState extends State<LoginPage> {
                       fontSize: loginTextSize,
                       color: Palette.loginButtonTextColor)),
             ),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => const MainPage(
+                    backgroundColor: Palette.backgroundColor,
+                  ),
+                ),
+              );
+            },
           ),
         ),
         Padding(
