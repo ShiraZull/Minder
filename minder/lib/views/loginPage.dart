@@ -1,10 +1,8 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:minder/config/palette.dart';
-import '../main.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key, required this.backgroundColor});
@@ -71,15 +69,6 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
-  @override
-  void dispose() {
-    emailController.dispose();
-    passwordController.dispose();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     Orientation orientation = MediaQuery.of(context).orientation;
@@ -123,8 +112,7 @@ class _LoginPageState extends State<LoginPage> {
                     OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
                 fillColor: Colors.blueGrey,
                 filled: true),
-            maxLength: 50,
-            controller: emailController,
+            maxLength: 15,
           ),
         ),
         Padding(
@@ -143,7 +131,6 @@ class _LoginPageState extends State<LoginPage> {
                 fillColor: Colors.blueGrey,
                 filled: true),
             maxLength: 20,
-            controller: passwordController,
           ),
         ),
         Padding(
@@ -156,34 +143,16 @@ class _LoginPageState extends State<LoginPage> {
                 backgroundColor: Palette.loginButtonColor,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30))),
-            onPressed: sginIn,
             child: Text(
               'Login',
               style: GoogleFonts.fugazOne(
                   textStyle: TextStyle(
                       fontSize: loginTextSize, color: Palette.loginTextColor)),
             ),
+            onPressed: () {},
           ),
         ),
       ]),
     );
-  }
-
-  Future sginIn() async {
-    showDialog(
-        context: context,
-        barrierDismissible: false,
-        builder: (context) => const Center(
-              child: CircularProgressIndicator(),
-            ));
-    try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: emailController.text.trim(),
-        password: passwordController.text.trim(),
-      );
-    } on FirebaseAuthException catch (e) {
-      print(e);
-    }
-    navigatorKey.currentState!.popUntil((route) => route.isFirst);
   }
 }
