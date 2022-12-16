@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:minder/config/palette.dart';
+import 'package:minder/views/homePage.dart';
 import 'package:minder/views/loginPage.dart';
 import 'views/loginsignup.dart';
 
@@ -9,18 +10,16 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Minder',
+      title: 'Swipe Cards Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: const LoginPage(
-        backgroundColor: Palette.backgroundColor,
-      ),
+      home: MyHomePage(title: 'Swipe Cards Demo'),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
