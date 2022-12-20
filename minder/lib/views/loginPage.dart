@@ -3,6 +3,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:minder/config/palette.dart';
 import 'package:minder/views/mainPage.dart';
 import 'package:minder/views/signupPage.dart';
+import '/config/size_utils.dart';
+import '/config/color_constant.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key, required this.backgroundColor});
@@ -14,6 +17,9 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+
   double paddingMinderTextLeft = 0,
       paddingMinderTextTop = 0,
       minderTextSize = 0,
@@ -40,6 +46,9 @@ class _LoginPageState extends State<LoginPage> {
   }) {
     final double smallestSize = height < width ? height : width;
     final double summedMeasurements = (height + width);
+    final MainAxisAlignment mainAxisAlignment;
+    final Size size = WidgetsBinding.instance.window.physicalSize /
+        WidgetsBinding.instance.window.devicePixelRatio;
     switch (orientation) {
       case Orientation.portrait:
         paddingMinderTextLeft = width * 0.05;
@@ -68,6 +77,13 @@ class _LoginPageState extends State<LoginPage> {
         break;
     }
   }
+  @override
+  void dispose(){
+    emailController.dispose();
+    passwordController.dispose();
+
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -81,105 +97,136 @@ class _LoginPageState extends State<LoginPage> {
       width: screenWidth,
     );
     return Scaffold(
-      backgroundColor: widget.backgroundColor,
-      body: Column(children: [
-        Padding(
-          padding: EdgeInsets.fromLTRB(
-              paddingMinderTextLeft, paddingMinderTextTop, 0, 0),
-          child: Text('Minder',
-              style: GoogleFonts.fugazOne(
-                  textStyle: TextStyle(
-                      fontSize: minderTextSize,
-                      color: Palette.minderTextColor))),
-        ),
-        Padding(
-          padding: EdgeInsets.fromLTRB(
-              paddingMinderImageLeft, paddingMinderImageTop, 0, 0),
-          child: Image.asset('assets/images/minderIcon.png'),
-        ),
-        Padding(
-          padding: EdgeInsets.fromLTRB(paddingTextFieldEmailLeft,
-              paddingTextFieldEmailTop, paddingTextFieldEmailRight, 0),
-          child: TextFormField(
-            decoration: InputDecoration(
-                contentPadding: EdgeInsets.fromLTRB(105, 5, 0, 30),
-                hintText: 'Email',
-                hintStyle: GoogleFonts.forum(
-                    textStyle: TextStyle(
-                        fontSize: loginTextSize - 20,
-                        color: Palette.loginTextColor)),
-                border:
-                    OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
-                fillColor: Colors.white,
-                filled: true),
-          ),
-        ),
-        Padding(
-          padding: EdgeInsets.fromLTRB(paddingTextFieldPasswordLeft,
-              paddingTextFieldPasswordTop, paddingTextFieldPasswordRight, 0),
-          child: TextFormField(
-            decoration: InputDecoration(
-                contentPadding: EdgeInsets.fromLTRB(85, 5, 0, 30),
-                hintText: 'Password',
-                hintStyle: GoogleFonts.forum(
-                    textStyle: TextStyle(
-                        fontSize: loginTextSize - 20,
-                        color: Palette.loginTextColor)),
-                border:
-                    OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
-                fillColor: Colors.white,
-                filled: true),
-            maxLength: 20,
-          ),
-        ),
-        Padding(
-          padding: EdgeInsets.fromLTRB(
-              paddingLoginButtonLeft, paddingLoginButtonBottom, 0, 0),
-          child: ElevatedButton(
-            style: ElevatedButton.styleFrom(
-                minimumSize: Size(
-                    loginSigninButtonSizeWidth, loginSigninButtonSizeHeight),
-                backgroundColor: Palette.loginButtonColor,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30))),
-            child: Text(
-              'Login',
-              style: GoogleFonts.francoisOne(
-                  textStyle: TextStyle(
-                      fontSize: loginTextSize,
-                      color: Palette.loginButtonTextColor)),
+      backgroundColor: ColorConstant.blueGray50,
+      body: Container(
+          width: size.width,
+          padding: getPadding(left: 45, right: 45),
+          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+            Padding(
+              padding: getPadding(top: 50),
+              child: Text('Minder',
+                  style: GoogleFonts.fugazOne(
+                      textStyle: TextStyle(
+                          fontSize: minderTextSize,
+                          color: Palette.minderTextColor))),
             ),
-            onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => const MainPage(
-                    backgroundColor: Palette.backgroundColor,
-                  ),
-                ),
-              );
-            },
-          ),
-        ),
-        Padding(
-            padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
-            child: TextButton(
-              onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => const SignupPage(
-                      backgroundColor: Palette.backgroundColor,
-                    ),
-                  ),
-                );
-              },
-              child: Text(
-                'Do not have an account? Signup',
-                style: GoogleFonts.forum(
-                    textStyle: TextStyle(
-                        fontSize: loginTextSize - 25, color: Colors.blueGrey)),
+            Padding(
+              padding: getPadding(top: 20),
+              child: Image.asset('assets/images/minderIcon.png'),
+            ),
+            Padding(
+              padding: getPadding(left: 2, top: 200),
+              child: TextFormField(
+                controller: emailController,
+                decoration: InputDecoration(
+                    contentPadding: const EdgeInsets.fromLTRB(50, 5, 0, 25),
+                    hintText: 'Email',
+                    hintStyle: GoogleFonts.forum(
+                        textStyle: TextStyle(
+                            fontSize: loginTextSize - 20,
+                            color: Palette.loginTextColor)),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30)),
+                    fillColor: Colors.white,
+                    filled: true),
               ),
-            ))
-      ]),
+            ),
+            Padding(
+              padding: getPadding(left: 2, top: 30),
+              child: TextFormField(
+                controller: passwordController,
+                decoration: InputDecoration(
+                    contentPadding: const EdgeInsets.fromLTRB(50, 5, 0, 25),
+                    hintText: 'Password',
+                    hintStyle: GoogleFonts.forum(
+                        textStyle: TextStyle(
+                            fontSize: loginTextSize - 20,
+                            color: Palette.loginTextColor)),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30)),
+                    fillColor: Colors.white,
+                    filled: true),
+                maxLength: 20,
+              ),
+            ),
+            GestureDetector(
+                onTap: () {
+                  signIn();
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const MainPage(
+                        backgroundColor: Palette.backgroundColor,
+                      ),
+                    ),
+                  );
+                },
+                child: Container(
+                    height: getVerticalSize(64.00),
+                    width: getHorizontalSize(296.00),
+                    margin: getMargin(top: 14),
+                    child: Stack(alignment: Alignment.topRight, children: [
+                      Align(
+                          alignment: Alignment.topLeft,
+                          child: Container(
+                              height: getVerticalSize(65.00),
+                              width: getHorizontalSize(90.00),
+                              decoration: BoxDecoration(
+                                  color: ColorConstant.blueGray900,
+                                  borderRadius: BorderRadius.circular(
+                                      getHorizontalSize(36.00))))),
+                      Align(
+                          alignment: Alignment.topRight,
+                          child: Container(
+                              height: getVerticalSize(65.00),
+                              width: getHorizontalSize(90.00),
+                              decoration: BoxDecoration(
+                                  color: ColorConstant.blueGray900,
+                                  borderRadius: BorderRadius.circular(
+                                      getHorizontalSize(36.00))))),
+                      Align(
+                          alignment: Alignment.topCenter,
+                          child: Container(
+                              height: getVerticalSize(65.00),
+                              width: getHorizontalSize(223.00),
+                              decoration: BoxDecoration(
+                                  color: ColorConstant.blueGray900))),
+                      Align(
+                          alignment: Alignment.center,
+                          child: Text("Login",
+                              overflow: TextOverflow.ellipsis,
+                              textAlign: TextAlign.left,
+                              style: GoogleFonts.francoisOne(
+                                  textStyle: TextStyle(
+                                      fontSize: loginTextSize - 3,
+                                      color: Palette.loginButtonTextColor))))
+                    ]))),
+            Padding(
+                padding: getPadding(top: 12),
+                child: TextButton(
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const SignupPage(
+                          backgroundColor: Palette.backgroundColor,
+                        ),
+                      ),
+                    );
+                  },
+                  child: Text(
+                    'Do not have an account? Signup',
+                    overflow: TextOverflow.ellipsis,
+                    textAlign: TextAlign.left,
+                    style: GoogleFonts.forum(
+                        textStyle: TextStyle(
+                            fontSize: loginTextSize - 24,
+                            color: ColorConstant.blueGray60001)),
+                  ),
+                ))
+          ])),
     );
+
+  }
+  Future signIn() async {
+    await FirebaseAuth.instance.signInWithEmailAndPassword(email: emailController.text.trim(), password: passwordController.text.trim());
   }
 }

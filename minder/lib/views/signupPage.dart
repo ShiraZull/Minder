@@ -3,7 +3,8 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:minder/views/loginPage.dart';
-
+import '/config/size_utils.dart';
+import '/config/color_constant.dart';
 import '../config/palette.dart';
 
 class SignupPage extends StatefulWidget {
@@ -92,104 +93,126 @@ class _SignupPageState extends State<SignupPage> {
 
     return Scaffold(
       backgroundColor: widget.backgroundColor,
-      body: Column(
-        children: [
-          Padding(
-            padding: EdgeInsets.fromLTRB(
-                paddingMinderTextLeft, paddingMinderTextTop, 0, 0),
-            child: Text('Minder',
-                style: GoogleFonts.fugazOne(
-                    textStyle: TextStyle(
-                        fontSize: minderTextSize,
-                        color: Palette.minderTextColor))),
-          ),
-          Padding(
-            padding: EdgeInsets.fromLTRB(
-                paddingMinderImageLeft, paddingMinderImageTop, 0, 0),
-            child: Image.asset('assets/images/minderIcon.png'),
-          ),
-          Padding(
-            padding: EdgeInsets.fromLTRB(paddingTextFieldEmailLeft,
-                paddingTextFieldEmailTop, paddingTextFieldEmailRight, 0),
-            child: TextFormField(
-              decoration: InputDecoration(
-                  contentPadding: EdgeInsets.fromLTRB(100, 5, 0, 30),
-                  hintText: 'Email',
-                  hintStyle: GoogleFonts.forum(
+      body: Container(
+        width: size.width,
+        padding: getPadding(left: 46, top: 76, right: 46),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Padding(
+              padding: getPadding(top: 50),
+              child: Text('Minder',
+                  style: GoogleFonts.fugazOne(
                       textStyle: TextStyle(
-                          fontSize: signupTextSize - 20,
-                          color: Palette.loginTextColor)),
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30)),
-                  fillColor: Colors.white,
-                  filled: true),
+                          fontSize: minderTextSize,
+                          color: Palette.minderTextColor))),
             ),
-          ),
-          Padding(
-            padding: EdgeInsets.fromLTRB(paddingTextFieldUsernameLeft,
-                paddingTextFieldUsernameTop, paddingTextFieldUsernameRight, 0),
-            child: TextFormField(
-              decoration: InputDecoration(
-                  contentPadding: EdgeInsets.fromLTRB(85, 5, 0, 30),
-                  hintText: 'Username',
-                  hintStyle: GoogleFonts.forum(
-                      textStyle: TextStyle(
-                          fontSize: signupTextSize - 20,
-                          color: Palette.loginTextColor)),
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30)),
-                  fillColor: Colors.white,
-                  filled: true),
-              maxLength: 15,
+            Padding(
+              padding: getPadding(top: 20),
+              child: Image.asset('assets/images/minderIcon.png'),
             ),
-          ),
-          Padding(
-            padding: EdgeInsets.fromLTRB(paddingTextFieldPasswordLeft,
-                paddingTextFieldPasswordTop, paddingTextFieldPasswordRight, 0),
-            child: TextFormField(
-              decoration: InputDecoration(
-                  contentPadding: EdgeInsets.fromLTRB(85, 5, 0, 30),
-                  hintText: 'Password',
-                  hintStyle: GoogleFonts.forum(
-                      textStyle: TextStyle(
-                          fontSize: signupTextSize - 20,
-                          color: Palette.loginTextColor)),
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30)),
-                  fillColor: Colors.white,
-                  filled: true),
-              maxLength: 20,
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.fromLTRB(
-                paddingLoginButtonLeft, paddingLoginButtonBottom, 0, 0),
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                  minimumSize: Size(
-                      loginSigninButtonSizeWidth, loginSigninButtonSizeHeight),
-                  backgroundColor: Palette.loginButtonColor,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30))),
-              child: Text(
-                'Signup',
-                style: GoogleFonts.francoisOne(
-                    textStyle: TextStyle(
-                        fontSize: signupTextSize,
-                        color: Palette.loginButtonTextColor)),
+            Padding(
+              padding: getPadding(left: 2, top: 150),
+              child: TextFormField(
+                decoration: InputDecoration(
+                    contentPadding: const EdgeInsets.fromLTRB(50, 5, 0, 25),
+                    hintText: 'Email',
+                    hintStyle: GoogleFonts.forum(
+                        textStyle: TextStyle(
+                            fontSize: signupTextSize - 20,
+                            color: Palette.loginTextColor)),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30)),
+                    fillColor: Colors.white,
+                    filled: true),
               ),
-              onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => const LoginPage(
-                      backgroundColor: Palette.backgroundColor,
-                    ),
-                  ),
-                );
-              },
             ),
-          ),
-        ],
+            Padding(
+              padding: getPadding(left: 2, top: 30),
+              child: TextFormField(
+                decoration: InputDecoration(
+                    contentPadding: const EdgeInsets.fromLTRB(50, 5, 0, 25),
+                    hintText: 'Username',
+                    hintStyle: GoogleFonts.forum(
+                        textStyle: TextStyle(
+                            fontSize: signupTextSize - 20,
+                            color: Palette.loginTextColor)),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30)),
+                    fillColor: Colors.white,
+                    filled: true),
+                maxLength: 15,
+              ),
+            ),
+            Padding(
+              padding: getPadding(left: 2, top: 5),
+              child: TextFormField(
+                decoration: InputDecoration(
+                    contentPadding: const EdgeInsets.fromLTRB(50, 5, 0, 25),
+                    hintText: 'Password',
+                    hintStyle: GoogleFonts.forum(
+                        textStyle: TextStyle(
+                            fontSize: signupTextSize - 20,
+                            color: Palette.loginTextColor)),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30)),
+                    fillColor: Colors.white,
+                    filled: true),
+                maxLength: 20,
+              ),
+            ),
+            GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const LoginPage(
+                        backgroundColor: Palette.backgroundColor,
+                      ),
+                    ),
+                  );
+                },
+                child: Container(
+                    height: getVerticalSize(64.00),
+                    width: getHorizontalSize(296.00),
+                    margin: getMargin(top: 14),
+                    child: Stack(alignment: Alignment.topRight, children: [
+                      Align(
+                          alignment: Alignment.topLeft,
+                          child: Container(
+                              height: getVerticalSize(65.00),
+                              width: getHorizontalSize(90.00),
+                              decoration: BoxDecoration(
+                                  color: ColorConstant.blueGray900,
+                                  borderRadius: BorderRadius.circular(
+                                      getHorizontalSize(36.00))))),
+                      Align(
+                          alignment: Alignment.topRight,
+                          child: Container(
+                              height: getVerticalSize(65.00),
+                              width: getHorizontalSize(90.00),
+                              decoration: BoxDecoration(
+                                  color: ColorConstant.blueGray900,
+                                  borderRadius: BorderRadius.circular(
+                                      getHorizontalSize(36.00))))),
+                      Align(
+                          alignment: Alignment.topCenter,
+                          child: Container(
+                              height: getVerticalSize(65.00),
+                              width: getHorizontalSize(223.00),
+                              decoration: BoxDecoration(
+                                  color: ColorConstant.blueGray900))),
+                      Align(
+                          alignment: Alignment.center,
+                          child: Text("Signup",
+                              overflow: TextOverflow.ellipsis,
+                              textAlign: TextAlign.left,
+                              style: GoogleFonts.francoisOne(
+                                  textStyle: TextStyle(
+                                      fontSize: signupTextSize,
+                                      color: Palette.loginButtonTextColor))))
+                    ]))),
+          ],
+        ),
       ),
     );
   }

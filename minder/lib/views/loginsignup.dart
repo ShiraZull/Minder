@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
@@ -6,6 +7,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:minder/config/palette.dart';
 import 'package:minder/views/loginPage.dart';
 import 'package:minder/views/signupPage.dart';
+import '/config/size_utils.dart';
+import '/config/color_constant.dart';
+import 'mainPage.dart';
 
 class LoginSignup extends StatefulWidget {
   const LoginSignup({super.key, required Color backgroundColor});
@@ -71,79 +75,137 @@ class _LoginSignupState extends State<LoginSignup> {
 
     return Scaffold(
       backgroundColor: Palette.backgroundColor,
-      body: Column(
-        children: [
-          Padding(
-            padding: EdgeInsets.fromLTRB(
-                paddingMinderTextLeft, paddingMinderTextTop, 0, 0),
-            child: Text('Minder',
-                style: GoogleFonts.fugazOne(
-                    textStyle: TextStyle(
-                        fontSize: minderTextSize,
-                        color: Palette.minderTextColor))),
-          ),
-          Padding(
-            padding: EdgeInsets.fromLTRB(
-                paddingMinderImageLeft, paddingMinderImageTop, 0, 0),
-            child: Image.asset('assets/images/minderIcon.png'),
-          ),
-          Padding(
-            padding: EdgeInsets.fromLTRB(
-                paddingLoginButtonLeft, paddingLoginButtonBottom, 0, 0),
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                  minimumSize: Size(
-                      loginSigninButtonSizeWidth, loginSigninButtonSizeHeight),
-                  backgroundColor: Palette.loginButtonColor,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30))),
-              child: Text(
-                'Login',
-                style: GoogleFonts.francoisOne(
-                    textStyle: TextStyle(
-                        fontSize: loginTextSize,
-                        color: Palette.loginButtonTextColor)),
-              ),
-              onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => const LoginPage(
-                      backgroundColor: Palette.backgroundColor,
-                    ),
-                  ),
-                );
-              },
+      body: Container(
+        width: size.width,
+        padding: getPadding(left: 46, top: 76, right: 46),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Padding(
+              padding: getPadding(top: 50),
+              child: Text('Minder',
+                  style: GoogleFonts.fugazOne(
+                      textStyle: TextStyle(
+                          fontSize: minderTextSize,
+                          color: Palette.minderTextColor))),
             ),
-          ),
-          Padding(
-            padding: EdgeInsets.fromLTRB(
-                paddingLoginButtonLeft, paddingSignupButtonBottom, 0, 0),
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                  minimumSize: Size(
-                      loginSigninButtonSizeWidth, loginSigninButtonSizeHeight),
-                  backgroundColor: Palette.signupButtonColor,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30))),
-              child: Text(
-                'Signup',
-                style: GoogleFonts.francoisOne(
-                    textStyle: TextStyle(
-                        fontSize: loginTextSize,
-                        color: Palette.loginButtonTextColor)),
-              ),
-              onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => const SignupPage(
-                      backgroundColor: Palette.backgroundColor,
-                    ),
-                  ),
-                );
-              },
+            Padding(
+              padding: getPadding(top: 20),
+              child: Image.asset('assets/images/minderIcon.png'),
             ),
-          ),
-        ],
+            GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => StreamBuilder<User?>(
+                        stream: FirebaseAuth.instance.authStateChanges(),
+                        builder: (context, snapshot) {
+                          if (snapshot.hasData) {
+                            return const MainPage(
+                              backgroundColor: Palette.backgroundColor,
+                            );
+                          } else {
+                            return const LoginPage(
+                              backgroundColor: Palette.backgroundColor,
+                            );
+                          }
+                        },
+                      ),
+                    ),
+                  );
+                },
+                child: Container(
+                    height: getVerticalSize(64.00),
+                    width: getHorizontalSize(296.00),
+                    margin: getMargin(top: 260),
+                    child: Stack(alignment: Alignment.topRight, children: [
+                      Align(
+                          alignment: Alignment.topLeft,
+                          child: Container(
+                              height: getVerticalSize(65.00),
+                              width: getHorizontalSize(90.00),
+                              decoration: BoxDecoration(
+                                  color: ColorConstant.blueGray900,
+                                  borderRadius: BorderRadius.circular(
+                                      getHorizontalSize(36.00))))),
+                      Align(
+                          alignment: Alignment.topRight,
+                          child: Container(
+                              height: getVerticalSize(65.00),
+                              width: getHorizontalSize(90.00),
+                              decoration: BoxDecoration(
+                                  color: ColorConstant.blueGray900,
+                                  borderRadius: BorderRadius.circular(
+                                      getHorizontalSize(36.00))))),
+                      Align(
+                          alignment: Alignment.topCenter,
+                          child: Container(
+                              height: getVerticalSize(65.00),
+                              width: getHorizontalSize(223.00),
+                              decoration: BoxDecoration(
+                                  color: ColorConstant.blueGray900))),
+                      Align(
+                          alignment: Alignment.center,
+                          child: Text("Login",
+                              overflow: TextOverflow.ellipsis,
+                              textAlign: TextAlign.left,
+                              style: GoogleFonts.francoisOne(
+                                  textStyle: TextStyle(
+                                      fontSize: loginTextSize - 3,
+                                      color: Palette.loginButtonTextColor))))
+                    ]))),
+            GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const SignupPage(
+                        backgroundColor: Palette.backgroundColor,
+                      ),
+                    ),
+                  );
+                },
+                child: Container(
+                    height: getVerticalSize(64.00),
+                    width: getHorizontalSize(296.00),
+                    margin: getMargin(top: 14),
+                    child: Stack(alignment: Alignment.topRight, children: [
+                      Align(
+                          alignment: Alignment.topLeft,
+                          child: Container(
+                              height: getVerticalSize(65.00),
+                              width: getHorizontalSize(90.00),
+                              decoration: BoxDecoration(
+                                  color: Palette.signupButtonColor,
+                                  borderRadius: BorderRadius.circular(
+                                      getHorizontalSize(36.00))))),
+                      Align(
+                          alignment: Alignment.topRight,
+                          child: Container(
+                              height: getVerticalSize(65.00),
+                              width: getHorizontalSize(90.00),
+                              decoration: BoxDecoration(
+                                  color: Palette.signupButtonColor,
+                                  borderRadius: BorderRadius.circular(
+                                      getHorizontalSize(36.00))))),
+                      Align(
+                          alignment: Alignment.topCenter,
+                          child: Container(
+                              height: getVerticalSize(65.00),
+                              width: getHorizontalSize(223.00),
+                              decoration: const BoxDecoration(
+                                  color: Palette.signupButtonColor))),
+                      Align(
+                          alignment: Alignment.center,
+                          child: Text("Signup",
+                              overflow: TextOverflow.ellipsis,
+                              textAlign: TextAlign.left,
+                              style: GoogleFonts.francoisOne(
+                                  textStyle: TextStyle(
+                                      fontSize: loginTextSize - 3,
+                                      color: Palette.loginButtonTextColor))))
+                    ]))),
+          ],
+        ),
       ),
     );
   }

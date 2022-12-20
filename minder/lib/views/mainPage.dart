@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
@@ -74,7 +75,7 @@ class _MainPageState extends State<MainPage> {
     Orientation orientation = MediaQuery.of(context).orientation;
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
-
+    final user = FirebaseAuth.instance.currentUser!;
     updateMeasurements(
       orientation: orientation,
       height: screenHeight,
@@ -82,7 +83,7 @@ class _MainPageState extends State<MainPage> {
     );
     return Scaffold(
       backgroundColor: widget.backgroundColor,
-      body: Column(children: [
+      body: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
         Padding(
           padding: EdgeInsets.fromLTRB(
               paddingMinderTextLeft, paddingMinderTextTop, 0, 0),
@@ -102,6 +103,30 @@ class _MainPageState extends State<MainPage> {
               paddingTextFieldEmailTop, paddingTextFieldEmailRight, 0),
           child: TextFormField(),
         ),
+        Text(
+          'Signed In as',
+          style: TextStyle(fontSize: 20),
+        ),
+        SizedBox(
+          height: 8,
+        ),
+        Text(
+          user.email!,
+          style: TextStyle(
+            fontSize: 25,
+          ),
+        ),
+        SizedBox(
+          height: 40,
+        ),
+        ElevatedButton.icon(
+          onPressed: () => FirebaseAuth.instance.signOut(),
+          icon: Icon(Icons.arrow_back, size: 36,),
+          label: Text(
+            'Sign Out',
+            style: TextStyle(fontSize: 24),
+          ),
+        )
       ]),
     );
   }
