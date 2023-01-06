@@ -13,12 +13,11 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int counter = 4;
+    //create a CardController
+    SwipeableCardSectionController _cardController = SwipeableCardSectionController();
 
   @override
   Widget build(BuildContext context) {
-    //create a CardController
-    SwipeableCardSectionController _cardController =
-        SwipeableCardSectionController();
 
     return Scaffold(
       appBar: AppBar(
