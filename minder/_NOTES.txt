@@ -1,0 +1,11 @@
+AuthRoute
+    LoginPage
+    SignupPage
+HomePage
+    Yay
+    Nay
+    RecipeDetails(Page)
+    SelectionPage
+        AddRecipePage
+    SettingsPage
+        LogOut
