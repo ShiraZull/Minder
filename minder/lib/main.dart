@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
-import 'authentication.dart';
+import 'authentication/login.dart';
+import 'authentication/signup.dart';
 import 'home.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() {
+SharedPreferences? prefs; // global
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  prefs = await SharedPreferences.getInstance();
+  //final success = await prefs?.remove('loggedIn');
   runApp(const MyApp());
 }
 
@@ -12,13 +19,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Code Sample for Navigator',
-      // MaterialApp contains our top-level Navigator
-      initialRoute: '/auth',
-      routes: <String, WidgetBuilder>{
-        '/': (BuildContext context) => const HomePage(),
-        '/auth': (BuildContext context) => const AuthPage(),
-      },
+      title: 'Wireframe for navigator',
+      home: prefs?.getBool('loggedIn') ?? false
+          ? const HomePage()
+          : const LogInPage(),
     );
   }
 }
