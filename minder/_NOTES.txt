@@ -1,5 +1,4 @@
-AuthRoute
-    LoginPage
+LoginPage
     SignupPage
 HomePage
     Yay

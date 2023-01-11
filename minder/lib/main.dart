@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'authentication/login.dart';
-import 'authentication/signup.dart';
-import 'home.dart';
+import 'authentication/loginPage.dart';
+import 'authentication/signupPage.dart';
+import 'app/homePage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 SharedPreferences? prefs; // global
