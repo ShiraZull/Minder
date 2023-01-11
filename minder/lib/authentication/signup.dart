@@ -39,9 +39,10 @@ class SignUpPage extends StatelessWidget {
           ),
           Center(
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const SizedBox(
-                  height: 100,
+                  height: 200,
                 ),
                 TextButton(
                   onPressed: getHome(context, false),
